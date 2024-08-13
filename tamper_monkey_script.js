@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Enhanced Slack Sidebar Toggle (In-Line, Hide by Default, Auto-Hide)
 // @namespace    http://tampermonkey.net/
-// @version      0.7
+// @version      0.8
 // @description  Toggle badges, bold text, and banners in Slack sidebar with improved performance, in-line toggle, hidden by default, and auto-hide after 10 minutes
 // @match        https://app.slack.com/client*
 // @grant        none
@@ -89,6 +89,14 @@
             .p-channel_sidebar__badge { display: none !important; }
             .p-channel_sidebar__name span { font-weight: normal !important; }
             .c-button-unstyled.p-channel_sidebar__banner.p-channel_sidebar__banner--mentions.p-channel_sidebar__banner--bottom { display: none !important; }
+            /* Target notification channels */
+            .p-channel_sidebar__channel--unread .p-channel_sidebar__name,
+            .p-channel_sidebar__link--unread .p-channel_sidebar__name,
+            .p-channel_sidebar__link--unread:not(.p-channel_sidebar__link--selected) .p-channel_sidebar__name,
+            .p-channel_sidebar__link--unread:not(.p-channel_sidebar__link--selected):hover .p-channel_sidebar__name {
+                font-weight: normal !important;
+                color: inherit !important;
+            }
         ` : '';
         dynamicStyle.textContent = css;
     }
